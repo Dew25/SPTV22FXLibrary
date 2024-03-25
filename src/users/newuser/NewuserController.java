@@ -53,6 +53,8 @@ public class NewuserController implements Initializable {
             homeController.getApp().getEntityManager().persist(reader);
             homeController.getApp().getEntityManager().persist(user);
             homeController.getApp().getEntityManager().getTransaction().commit();
+            homeController.getLbInfo().getStyleClass().clear();
+            homeController.getLbInfo().getStyleClass().add("info");
             homeController.getLbInfo().setText("Пользователь успешно добавлен");
             tfFirstName.setText("");
             tfLastName.setText("");
@@ -60,6 +62,8 @@ public class NewuserController implements Initializable {
             tfLogin.setText("");
             tfPassword.setText("");
         } catch (Exception e) {
+            homeController.getLbInfo().getStyleClass().clear();
+            homeController.getLbInfo().getStyleClass().add("infoError");
             homeController.getLbInfo().setText("Добавить пользователя не удалось");
         }
     }
