@@ -8,8 +8,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<VBox fx:id="vbHomeRoot" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sptv22fxlibrary.HomeController">
+<VBox fx:id="vbHomeRoot" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" spacing="5.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sptv22fxlibrary.HomeController">
    <children>
       <MenuBar fx:id="mbMenu">
         <menus>
@@ -18,9 +17,9 @@
               <MenuItem mnemonicParsing="false" text="Close" />
             </items>
           </Menu>
-          <Menu mnemonicParsing="false" text="Edit">
+          <Menu mnemonicParsing="false" text="Пользователи">
             <items>
-              <MenuItem mnemonicParsing="false" text="Delete" />
+              <MenuItem fx:id="miNewUser" mnemonicParsing="false" onAction="#addNewUser" text="Добавить пользователя" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Help">
@@ -30,10 +29,13 @@
           </Menu>
         </menus>
       </MenuBar>
-      <Label fx:id="lbInfo" />
-      <VBox alignment="CENTER">
+      <Label fx:id="lbInfo">
+         <VBox.margin>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </VBox.margin></Label>
+      <VBox fx:id="vbContent" alignment="CENTER" spacing="10.0">
          <children>
-            <Label fx:id="lbHello" text="Добро пожаловать в нашу библиотеку!" textAlignment="CENTER">
+            <Label fx:id="lbHello" text="" textAlignment="CENTER">
                <font>
                   <Font size="24.0" />
                </font>
@@ -42,6 +44,9 @@
                </VBox.margin>
             </Label>
          </children>
+         <padding>
+            <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
+         </padding>
       </VBox>
    </children>
 </VBox>
