@@ -38,6 +38,14 @@ public class NewuserController implements Initializable {
      */
     
     @FXML private void clickAddNewUser(){
+        if(tfFirstName.getText().isEmpty() || tfLastName.getText().isEmpty()
+                || tfPhone.getText().isEmpty() || tfLogin.getText().isEmpty()
+                || tfPassword.getText().isEmpty()){
+            homeController.getLbInfo().getStyleClass().clear();
+            homeController.getLbInfo().getStyleClass().add("infoError");
+            homeController.getLbInfo().setText("Заполните все поля");
+            return;
+        }
         Reader reader = new Reader();
         reader.setFirstname(tfFirstName.getText());
         reader.setLastname(tfLastName.getText());

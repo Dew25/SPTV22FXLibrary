@@ -5,6 +5,7 @@
  */
 package sptv22fxlibrary;
 
+import books.newbook.NewbookController;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -34,12 +35,28 @@ public class HomeController implements Initializable {
          try {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(getClass().getResource("/users/newuser/newuser.fxml"));
-            GridPane gpNewUser = loader.load();
+            VBox vbNewUserRoot = loader.load();
             NewuserController newuserController = loader.getController();
             newuserController.setHomeController(this);
             app.getPrimaryStage().setTitle("SPTV22FXLibrary - Добавление нового пользователя");
             vbContent.getChildren().clear();
-            vbContent.getChildren().add(gpNewUser);
+            vbContent.getChildren().add(vbNewUserRoot);
+            
+        } catch (IOException ex) {
+            Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    @FXML
+    private void addNewBook(){
+         try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("/books/newbook/newbook.fxml"));
+            VBox vbNewBookRoot = loader.load();
+            NewbookController newbookController = loader.getController();
+            newbookController.setHomeController(this);
+            app.getPrimaryStage().setTitle("SPTV22FXLibrary - Добавление новой книги");
+            vbContent.getChildren().clear();
+            vbContent.getChildren().add(vbNewBookRoot);
             
         } catch (IOException ex) {
             Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);

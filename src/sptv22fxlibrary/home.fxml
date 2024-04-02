@@ -12,9 +12,9 @@
    <children>
       <MenuBar fx:id="mbMenu">
         <menus>
-          <Menu mnemonicParsing="false" text="File">
+          <Menu mnemonicParsing="false" text="Книги">
             <items>
-              <MenuItem mnemonicParsing="false" text="Close" />
+              <MenuItem mnemonicParsing="false" onAction="#addNewBook" text="Новая книга" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Пользователи">
@@ -31,9 +31,12 @@
       </MenuBar>
       <Label fx:id="lbInfo">
          <VBox.margin>
-            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-         </VBox.margin></Label>
-      <VBox fx:id="vbContent" alignment="CENTER" spacing="10.0">
+            <Insets />
+         </VBox.margin>
+         <font>
+            <Font size="14.0" />
+         </font></Label>
+      <VBox fx:id="vbContent" alignment="CENTER" prefHeight="359.0" prefWidth="600.0" spacing="10.0">
          <children>
             <Label fx:id="lbHello" text="" textAlignment="CENTER">
                <font>
@@ -44,9 +47,6 @@
                </VBox.margin>
             </Label>
          </children>
-         <padding>
-            <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
-         </padding>
       </VBox>
    </children>
 </VBox>
