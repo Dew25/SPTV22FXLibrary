@@ -15,7 +15,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import users.newuser.NewuserController;
 
@@ -38,7 +37,7 @@ public class HomeController implements Initializable {
             VBox vbNewUserRoot = loader.load();
             NewuserController newuserController = loader.getController();
             newuserController.setHomeController(this);
-            app.getPrimaryStage().setTitle("SPTV22FXLibrary - Добавление нового пользователя");
+            app.getPrimaryStage().setTitle("SPTV22FXLibrary - Р”РѕР±Р°РІР»РµРЅРёРµ РЅРѕРІРѕРіРѕ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ");
             vbContent.getChildren().clear();
             vbContent.getChildren().add(vbNewUserRoot);
             
@@ -54,7 +53,7 @@ public class HomeController implements Initializable {
             VBox vbNewBookRoot = loader.load();
             NewbookController newbookController = loader.getController();
             newbookController.setHomeController(this);
-            app.getPrimaryStage().setTitle("SPTV22FXLibrary - Добавление новой книги");
+            app.getPrimaryStage().setTitle("SPTV22FXLibrary - Р”РѕР±Р°РІР»РµРЅРёРµ РЅРѕРІРѕР№ РєРЅРёРіРё");
             vbContent.getChildren().clear();
             vbContent.getChildren().add(vbNewBookRoot);
             
@@ -65,7 +64,7 @@ public class HomeController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        lbHello.setText("Добро пожаловать в нашу библиотеку!");
+        lbHello.setText("Добро пожаловать в библиотеку!");
        
     }    
 
