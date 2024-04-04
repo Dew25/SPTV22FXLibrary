@@ -38,6 +38,14 @@ public class NewuserController implements Initializable {
      */
     
     @FXML private void clickAddNewUser(){
+        if(tfFirstName.getText().isEmpty() || tfLastName.getText().isEmpty()
+                || tfPhone.getText().isEmpty() || tfLogin.getText().isEmpty()
+                || tfPassword.getText().isEmpty()){
+            homeController.getLbInfo().getStyleClass().clear();
+            homeController.getLbInfo().getStyleClass().add("infoError");
+            homeController.getLbInfo().setText("Заполните все поля формы");
+            return;
+        }
         Reader reader = new Reader();
         reader.setFirstname(tfFirstName.getText());
         reader.setLastname(tfLastName.getText());
@@ -50,8 +58,8 @@ public class NewuserController implements Initializable {
         user.getRoles().add(sptv22fxlibrary.SPTV22FXLibrary.ROLES.USER.toString());
         try {
             homeController.getApp().getEntityManager().getTransaction().begin();
-            homeController.getApp().getEntityManager().persist(reader);
-            homeController.getApp().getEntityManager().persist(user);
+                homeController.getApp().getEntityManager().persist(reader);
+                homeController.getApp().getEntityManager().persist(user);
             homeController.getApp().getEntityManager().getTransaction().commit();
             homeController.getLbInfo().getStyleClass().clear();
             homeController.getLbInfo().getStyleClass().add("info");

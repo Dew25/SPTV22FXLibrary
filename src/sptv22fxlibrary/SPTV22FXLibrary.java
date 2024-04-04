@@ -50,16 +50,6 @@ public class SPTV22FXLibrary extends Application {
         primaryStage.show();
     }
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        launch(args);
-    }
-
-    public EntityManager getEntityManager() {
-        return entityManager;
-    }
 
     private void checkSuperUser() {
         if(!(getEntityManager().createQuery("SELECT u FROM User u").getResultList().size()>0)){
@@ -82,6 +72,16 @@ public class SPTV22FXLibrary extends Application {
         }
     }
     
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+        launch(args);
+    }
+
+    public EntityManager getEntityManager() {
+        return entityManager;
+    }
     public Stage getPrimaryStage() {
         return primaryStage;
     }
