@@ -5,26 +5,26 @@
  */
 package books.newbook;
 
-import authors.listauthors222.ListAuthorsController;
+
+import authors.newauthor.NewauthorController;
 import entity.Author;
 import entity.Book;
-import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -78,7 +78,32 @@ public class NewbookController implements Initializable {
             lvAuthors.getItems().addAll(selectedAuthors);
             modalWindows.close();
         });
-        VBox root = new VBox(listViewAuthorsWindow, selectButton);
+        Button btAddAuthors = new Button("Добавить авторов");
+        btAddAuthors.setOnAction(event -> {
+            Stage modalWindowsAddAuthors = new Stage();
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("/authors/newauthor/newauthor.fxml"));
+            try {
+                VBox vbNewAuthor = loader.load();
+                NewauthorController newauthorController=loader.getController();
+                newauthorController.setNewbookController(this);
+                newauthorController.setStage(modalWindowsAddAuthors);
+                Scene scene = new Scene(vbNewAuthor,532,269);
+                scene.getStylesheets().add(getClass().getResource("/authors/newauthor/newauthor.css").toExternalForm());
+                modalWindowsAddAuthors.setTitle("Новый автор");
+                modalWindowsAddAuthors.setScene(scene);
+                modalWindowsAddAuthors.initModality(Modality.WINDOW_MODAL);
+                modalWindowsAddAuthors.initOwner(homeController.getApp().getPrimaryStage());
+                modalWindows.close();
+                modalWindowsAddAuthors.show();
+            } catch (Exception e) {
+            }
+            
+        });
+        HBox hbButtons = new HBox(selectButton, btAddAuthors);
+        hbButtons.setSpacing(10);
+        hbButtons.setAlignment(Pos.CENTER_RIGHT);
+        VBox root = new VBox(listViewAuthorsWindow, hbButtons);
         Scene scene = new Scene(root,300, 250);
         modalWindows.setTitle("Список авторов");
         modalWindows.initModality(Modality.WINDOW_MODAL);
@@ -87,6 +112,13 @@ public class NewbookController implements Initializable {
         modalWindows.show();
     }
     @FXML private void clickAddBook(){
+        if(tfTitle.getText().isEmpty() || tfPublishedYear.getText().isEmpty()
+                    || tfQuantity.getText().isEmpty() || lvAuthors.getItems().isEmpty()){
+            homeController.getLbInfo().getStyleClass().clear();
+            homeController.getLbInfo().getStyleClass().add("infoError");
+            homeController.getLbInfo().setText("Заполните все поля формы");
+            return;
+        }
         Book book = new Book();
         book.setTitle(tfTitle.getText());
         book.setPublishedYear(Integer.parseInt(tfPublishedYear.getText()));
@@ -99,6 +131,7 @@ public class NewbookController implements Initializable {
         }
         book.getAuthors().addAll(bookAuthors);
         try {
+            
             homeController.getApp().getEntityManager().getTransaction().begin();
                 homeController.getApp().getEntityManager().persist(book);
             homeController.getApp().getEntityManager().getTransaction().commit();
