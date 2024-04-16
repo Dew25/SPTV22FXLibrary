@@ -45,10 +45,10 @@ public class LoginformController implements Initializable {
                 return;
             }
             sptv22fxlibrary.SPTV22FXLibrary.user=user;
-            homeController.getLoginWindow().close();
             homeController.getLbInfo().getStyleClass().clear();
             homeController.getLbInfo().getStyleClass().add("info");
             homeController.getLbInfo().setText("Вы вошли как "+user.getLogin());
+            homeController.getLoginWindow().close();
         } catch (Exception e) {
             lbLoginInfo.setText("Нет такого пользователя");
             System.out.println("error: "+e);

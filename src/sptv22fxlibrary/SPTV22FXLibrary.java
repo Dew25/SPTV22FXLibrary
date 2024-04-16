@@ -44,7 +44,8 @@ public class SPTV22FXLibrary extends Application {
         Parent root = loader.load();
         HomeController homeController = loader.getController();
         homeController.setApp(this);
-        Scene scene = new Scene(root);
+        homeController.loadBooks();
+        Scene scene = new Scene(root,600,400);
         scene.getStylesheets().add(getClass().getResource("home.css").toExternalForm());
         primaryStage.setScene(scene);
         primaryStage.show();

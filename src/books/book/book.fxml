@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="221.0" prefWidth="178.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="books.book.BookController">
+   <children>
+      <Label alignment="CENTER" prefHeight="17.0" prefWidth="179.0" text="Название книги" wrapText="true">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="lbAuthors" alignment="CENTER" prefHeight="17.0" prefWidth="180.0" text="Авторы книги" wrapText="true" />
+      <Label fx:id="lbPublishedYear" alignment="CENTER" prefHeight="17.0" prefWidth="175.0" text="Год публикации" />
+      <Label fx:id="lbQuantity" alignment="CENTER" prefHeight="17.0" prefWidth="181.0" text="Количество экзепояпрв" />
+   </children>
+   <padding>
+      <Insets top="30.0" />
+   </padding>
+   
+</VBox>
