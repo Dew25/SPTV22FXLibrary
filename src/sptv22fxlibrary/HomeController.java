@@ -5,7 +5,10 @@
  */
 package sptv22fxlibrary;
 
+
 import books.book.BookController;
+import books.listbooks.ListbooksController;
+
 import books.newbook.NewbookController;
 import entity.Book;
 import java.io.IOException;
@@ -14,9 +17,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.beans.Observable;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableArray;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -27,7 +28,6 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.util.Callback;
 import users.listusers.ListusersController;
 import users.loginform.LoginformController;
 import users.newuser.NewuserController;
@@ -142,6 +142,24 @@ public class HomeController implements Initializable {
             Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    @FXML 
+    private void listBooks(){
+         try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("/books/listbooks/listbooks.fxml"));
+            VBox vbListBooks = loader.load();
+            ListbooksController listbooksController = loader.getController();
+            listbooksController.setHomeController(this);
+            listbooksController.loadBooks();
+            app.getPrimaryStage().setTitle("SPTV22FXLibrary - Список книг");
+            this.lbInfo.setText("");
+            vbContent.getChildren().clear();
+            vbContent.getChildren().add(vbListBooks);
+            
+        } catch (IOException ex) {
+            Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -176,7 +194,7 @@ public class HomeController implements Initializable {
             loader.setLocation(getClass().getResource("/books/book/book.fxml"));
             VBox vbBook = loader.load();
             BookController bookController = loader.getController();
-            bookController.setHomeController(this);
+           
             
         } catch (IOException ex) {
             Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);

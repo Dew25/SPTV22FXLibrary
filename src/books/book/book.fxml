@@ -2,22 +2,40 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="221.0" prefWidth="178.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="books.book.BookController">
+
+<VBox fx:id="vbBookRoot" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="238.0" prefWidth="169.0" spacing="2.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="books.book.BookController">
    <children>
-      <Label alignment="CENTER" prefHeight="17.0" prefWidth="179.0" text="Название книги" wrapText="true">
+      <Label fx:id="lbTitleBook" alignment="CENTER" prefHeight="17.0" prefWidth="168.0" textFill="#272f05" wrapText="true">
          <font>
-            <Font size="18.0" />
+            <Font size="14.0" />
          </font>
       </Label>
-      <Label fx:id="lbAuthors" alignment="CENTER" prefHeight="17.0" prefWidth="180.0" text="Авторы книги" wrapText="true" />
-      <Label fx:id="lbPublishedYear" alignment="CENTER" prefHeight="17.0" prefWidth="175.0" text="Год публикации" />
-      <Label fx:id="lbQuantity" alignment="CENTER" prefHeight="17.0" prefWidth="181.0" text="Количество экзепояпрв" />
+      <Label text="Авторы:" />
+      <Label fx:id="lbAuthors" wrapText="true" />
+      <HBox spacing="2.0">
+         <children>
+            <Label text="Год издания:" />
+            <Label fx:id="lbPublishedYear" wrapText="true" />
+         </children>
+      </HBox>
+      <HBox spacing="2.0">
+         <children>
+            <Label text="Количество экз.:" />
+            <Label fx:id="lbQuantity" wrapText="true" />
+         </children>
+      </HBox>
+      <HBox spacing="2.0">
+         <children>
+            <Label text="В наличии:" />
+            <Label fx:id="lbCount" />
+         </children>
+      </HBox>
    </children>
    <padding>
-      <Insets top="30.0" />
+      <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
    </padding>
-   
 </VBox>
