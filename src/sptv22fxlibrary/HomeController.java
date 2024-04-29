@@ -5,6 +5,7 @@
  */
 package sptv22fxlibrary;
 
+import books.listbooks.ListbooksController;
 import books.newbook.NewbookController;
 import java.io.IOException;
 import java.net.URL;
@@ -128,6 +129,24 @@ public class HomeController implements Initializable {
             this.lbInfo.setText("");
             vbContent.getChildren().clear();
             vbContent.getChildren().add(vbListUsers);
+            
+        } catch (IOException ex) {
+            Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    @FXML 
+    private void listBooks(){
+         try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("/books/listbooks/listbooks.fxml"));
+            VBox vbListBooks = loader.load();
+            ListbooksController listbooksController = loader.getController();
+            listbooksController.setHomeController(this);
+            listbooksController.loadBooks();
+            app.getPrimaryStage().setTitle("SPTV22FXLibrary - Список книг");
+            this.lbInfo.setText("");
+            vbContent.getChildren().clear();
+            vbContent.getChildren().add(vbListBooks);
             
         } catch (IOException ex) {
             Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
