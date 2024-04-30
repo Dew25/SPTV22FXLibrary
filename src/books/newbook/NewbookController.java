@@ -9,6 +9,8 @@ package books.newbook;
 import authors.newauthor.NewauthorController;
 import entity.Author;
 import entity.Book;
+import java.io.File;
+import java.io.FileInputStream;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,6 +28,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Callback;
@@ -41,12 +44,14 @@ public class NewbookController implements Initializable {
     private HomeController homeController;
     private ObservableList<Author> authors;
     private VBox vbAuthorsRoot;
+    private File selectedFile;
     @FXML private TextField tfTitle;
     @FXML private TextField tfPublishedYear;
     @FXML private TextField tfQuantity;
     @FXML private Button btAddAuthors;
     @FXML private ListView lvAuthors;
     @FXML private Button btAddBook;
+    @FXML private Button btAddCover;
     
     
     
@@ -130,6 +135,13 @@ public class NewbookController implements Initializable {
             bookAuthors.add(author);
         }
         book.getAuthors().addAll(bookAuthors);
+        try(FileInputStream fis = new FileInputStream(selectedFile)){
+           byte[] fileContent = new byte[(int)selectedFile.length()];
+           fis.read(fileContent);
+           book.setCover(fileContent);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
         try {
             
             homeController.getApp().getEntityManager().getTransaction().begin();
@@ -139,6 +151,8 @@ public class NewbookController implements Initializable {
             tfPublishedYear.setText("");
             tfQuantity.setText("");
             lvAuthors.getItems().clear();
+            btAddCover.setText("Выберите обложку");
+            selectedFile=null;
             homeController.getLbInfo().getStyleClass().clear();
             homeController.getLbInfo().getStyleClass().add("info");
             homeController.getLbInfo().setText("Книга добавлена");
@@ -175,6 +189,24 @@ public class NewbookController implements Initializable {
                     };
                 }
             });
+        btAddCover.setOnAction(e -> {
+            FileChooser fileChooser = new FileChooser();
+            fileChooser.setTitle("Выберите файл");
+            // Фильтры расширений файлов
+            fileChooser.getExtensionFilters().addAll(
+                    new FileChooser.ExtensionFilter("Текстовые файлы", "*.txt"),
+                    new FileChooser.ExtensionFilter("Все файлы", "*.*")
+            );
+            selectedFile = fileChooser.showOpenDialog(getHomeController().getApp().getPrimaryStage());
+            btAddCover.setText("Выбран файл: "+selectedFile.getName());
+           
+            if (selectedFile != null) {
+                System.out.println("Выбранный файл: " + selectedFile.getAbsolutePath());
+                // Здесь вы можете выполнить операции с выбранным файлом
+            } else {
+                System.out.println("Файл не выбран.");
+            }
+        });
     }    
 
     public void setHomeController(HomeController homeController) {

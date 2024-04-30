@@ -73,6 +73,19 @@
             <TextField fx:id="tfQuantity" prefHeight="25.0" prefWidth="182.0" />
          </children>
       </HBox>
+      <HBox alignment="CENTER_LEFT" prefHeight="37.0" prefWidth="600.0">
+         <children>
+            <Label alignment="TOP_RIGHT" prefHeight="19.0" prefWidth="170.0">
+               <HBox.margin>
+                  <Insets right="5.0" />
+               </HBox.margin>
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </Label>
+            <Button fx:id="btAddCover" mnemonicParsing="false" prefHeight="25.0" prefWidth="242.0" text="Выберите обложку" />
+         </children>
+      </HBox>
       <HBox alignment="CENTER" prefHeight="37.0" prefWidth="600.0">
          <children>
             <Button fx:id="btAddBook" mnemonicParsing="false" onAction="#clickAddBook" text="Добавить книгу">

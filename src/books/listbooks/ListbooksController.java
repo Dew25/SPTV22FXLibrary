@@ -8,9 +8,9 @@ package books.listbooks;
 import books.book.BookController;
 import entity.Book;
 import entity.History;
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.net.URL;
-import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -23,6 +23,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Cursor;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
@@ -64,7 +65,7 @@ public class ListbooksController implements Initializable {
                 VBox vbBookRoot = bookLoader.load();
                 Book book = listBooks.get(i);
                 BookController bookController = bookLoader.getController();
-                bookController.setListBooks(this);
+                bookController.setListBooksController(this);
                 bookController.setBook(book);
                 // Навешиваем обработчик события наведения мыши на VBox
                 vbBookRoot.setOnMouseEntered(event -> {
@@ -99,17 +100,29 @@ public class ListbooksController implements Initializable {
             FXMLLoader bookLoader = new FXMLLoader();
             bookLoader.setLocation(getClass().getResource("/books/book/book.fxml"));
             VBox vbBookRoot = bookLoader.load();
+            BookController bookController = bookLoader.getController();
+            bookController.getIvCover().setImage(new Image(new ByteArrayInputStream(book.getCover())));
+            bookController.getIvCover().setFitWidth(400);
+            bookController.getIvCover().setFitHeight(300);
+//            vbBookRoot.setPrefWidth(400);
+//            vbBookRoot.setPrefHeight(700);
+            bookController.setBook(book);
+            vbBookRoot.setAlignment(Pos.CENTER);
+            bookController.getVbBookAtributes().setVisible(true);
             Button btTakeOn=new Button("Читать книгу");
             btTakeOn.setOnAction(event->{
                 takeOnBookToReader(book);
             });
             vbBookRoot.getChildren().add(btTakeOn);
-            Scene scene = new Scene(vbBookRoot,300, 250);
+            Scene scene = new Scene(vbBookRoot,400, 600);
             modalWindow.setTitle(book.getTitle());
             modalWindow.initModality(Modality.WINDOW_MODAL);
             modalWindow.initOwner(getHomeContoller().getApp().getPrimaryStage());
             modalWindow.setScene(scene);
             modalWindow.show();
+            
+//            double heigth = bookController.getVbBookAtributes().getHeight();
+//            vbBookRoot.setPrefHeight(heigth+bookController.getIvCover().getFitHeight()+100);
         } catch (IOException ex) {
             Logger.getLogger(ListbooksController.class.getName()).log(Level.SEVERE, "not found book.fxml", ex);
         }

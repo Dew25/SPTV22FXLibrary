@@ -14,6 +14,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.OneToMany;
 
 /**
@@ -30,6 +31,8 @@ public class Book implements Serializable{
     private List<Author> authors;
     private int quantity;
     private int count;
+    @Lob
+    private byte[] cover;
 
     public Book() {
         this.authors = new ArrayList<>();
@@ -125,6 +128,14 @@ public class Book implements Serializable{
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public byte[] getCover() {
+        return cover;
+    }
+
+    public void setCover(byte[] cover) {
+        this.cover = cover;
     }
     
     
