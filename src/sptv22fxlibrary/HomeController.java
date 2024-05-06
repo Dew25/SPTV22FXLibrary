@@ -6,6 +6,7 @@
 package sptv22fxlibrary;
 
 
+import admin.adminpanel.AdminpanelController;
 import books.book.BookController;
 import books.listbooks.ListbooksController;
 
@@ -45,6 +46,36 @@ public class HomeController implements Initializable {
     @FXML private VBox vbContent;
     
     @FXML
+    public void showAdminPanel(){
+        if(sptv22fxlibrary.SPTV22FXLibrary.user == null){
+            getLbInfo().getStyleClass().clear();
+            getLbInfo().getStyleClass().add("infoError");
+            getLbInfo().setText("Войдите в программу со своим логином!"); 
+            return;
+        }
+        if(!sptv22fxlibrary.SPTV22FXLibrary.user.getRoles().contains(sptv22fxlibrary.SPTV22FXLibrary.ROLES.ADMINISTRATOR.toString())){
+            getLbInfo().getStyleClass().clear();
+            getLbInfo().getStyleClass().add("infoError");
+            getLbInfo().setText("У вас нет прав на этот ресурс. Только для администраторов!"); 
+            return;
+        }
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("/admin/adminpanel/adminpanel.fxml"));
+        try {
+            VBox vbAdminpanelRoot = loader.load();
+            AdminpanelController adminpanelController = loader.getController();
+            adminpanelController.setHomeController(this);
+            adminpanelController.loadUsers();
+            adminpanelController.loadRoles();
+            vbContent.getChildren().clear();
+            vbContent.getChildren().add(vbAdminpanelRoot);
+            
+        } catch (Exception e) {
+            System.out.println("error: "+e);
+        }
+    }
+        
+    @FXML
     public void login(){
         loginWindow = new Stage();
         FXMLLoader loader = new FXMLLoader();
@@ -69,7 +100,10 @@ public class HomeController implements Initializable {
     
     @FXML
     private void addNewUser(){
-         try {
+        getLbInfo().getStyleClass().clear();
+        getLbInfo().getStyleClass().add("info");
+        getLbInfo().setText("");
+        try {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(getClass().getResource("/users/newuser/newuser.fxml"));
             VBox vbNewUser = loader.load();
@@ -109,6 +143,18 @@ public class HomeController implements Initializable {
     }
     @FXML
     private void addNewBook(){
+        if(sptv22fxlibrary.SPTV22FXLibrary.user == null){
+            getLbInfo().getStyleClass().clear();
+            getLbInfo().getStyleClass().add("infoError");
+            getLbInfo().setText("Войдите в программу со своим логином!"); 
+            return;
+        }
+        if(!sptv22fxlibrary.SPTV22FXLibrary.user.getRoles().contains(sptv22fxlibrary.SPTV22FXLibrary.ROLES.MANAGER.toString())){
+            getLbInfo().getStyleClass().clear();
+            getLbInfo().getStyleClass().add("infoError");
+            getLbInfo().setText("У вас нет прав на этот ресурс. Только для менеджеров!"); 
+            return;
+        }
          try {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(getClass().getResource("/books/newbook/newbook.fxml"));
@@ -126,6 +172,18 @@ public class HomeController implements Initializable {
     }
     @FXML 
     private void listUsers(){
+        if(sptv22fxlibrary.SPTV22FXLibrary.user == null){
+            getLbInfo().getStyleClass().clear();
+            getLbInfo().getStyleClass().add("infoError");
+            getLbInfo().setText("Войдите в программу со своим логином!"); 
+            return;
+        }
+        if(!sptv22fxlibrary.SPTV22FXLibrary.user.getRoles().contains(sptv22fxlibrary.SPTV22FXLibrary.ROLES.MANAGER.toString())){
+            getLbInfo().getStyleClass().clear();
+            getLbInfo().getStyleClass().add("infoError");
+            getLbInfo().setText("У вас нет прав на этот ресурс. Только для менеджеров!"); 
+            return;
+        }
          try {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(getClass().getResource("/users/listusers/listusers.fxml"));
@@ -144,6 +202,18 @@ public class HomeController implements Initializable {
     }
     @FXML 
     private void listBooks(){
+        if(sptv22fxlibrary.SPTV22FXLibrary.user == null){
+            getLbInfo().getStyleClass().clear();
+            getLbInfo().getStyleClass().add("infoError");
+            getLbInfo().setText("Войдите в программу со своим логином!"); 
+            return;
+        }
+        if(!sptv22fxlibrary.SPTV22FXLibrary.user.getRoles().contains(sptv22fxlibrary.SPTV22FXLibrary.ROLES.USER.toString())){
+            getLbInfo().getStyleClass().clear();
+            getLbInfo().getStyleClass().add("infoError");
+            getLbInfo().setText("У вас нет прав на этот ресурс. Только для пользователей!"); 
+            return;
+        }
          try {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(getClass().getResource("/books/listbooks/listbooks.fxml"));

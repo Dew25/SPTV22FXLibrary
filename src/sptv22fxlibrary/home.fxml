@@ -26,11 +26,11 @@
                   <MenuItem fx:id="miProfile" mnemonicParsing="false" onAction="#userProfile" text="Профиль пользователя" />
             </items>
           </Menu>
-          <Menu mnemonicParsing="false" text="Help">
-            <items>
-              <MenuItem mnemonicParsing="false" text="About" />
-            </items>
-          </Menu>
+            <Menu mnemonicParsing="false" text="Администратор">
+               <items>
+                  <MenuItem fx:id="miAdminPanel" mnemonicParsing="false" onAction="#showAdminPanel" text="Панель администратора" />
+               </items>
+            </Menu>
         </menus>
       </MenuBar>
       <Label fx:id="lbInfo">
@@ -40,7 +40,7 @@
          <font>
             <Font size="13.0" />
          </font></Label>
-      <VBox fx:id="vbContent" alignment="TOP_CENTER" prefHeight="335.0" prefWidth="600.0" spacing="10.0">
+      <VBox fx:id="vbContent" alignment="TOP_CENTER" prefHeight="337.0" prefWidth="600.0" spacing="10.0">
          <children>
             <Label fx:id="lbHello" text="" textAlignment="CENTER">
                <font>
