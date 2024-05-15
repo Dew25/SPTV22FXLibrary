@@ -29,6 +29,7 @@
             <Menu mnemonicParsing="false" text="Администратор">
                <items>
                   <MenuItem fx:id="miAdminPanel" mnemonicParsing="false" onAction="#showAdminPanel" text="Панель администратора" />
+                  <MenuItem fx:id="miRanges" mnemonicParsing="false" onAction="#showRangepage" text="Рейтинги" />
                </items>
             </Menu>
         </menus>

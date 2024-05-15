@@ -120,6 +120,20 @@ public class User implements Serializable{
     public void setRoles(List<String> roles) {
         this.roles = roles;
     }
+    public String getReaderFirstname() {
+        return reader.getFirstname();
+    }
+
+    public void setReaderFirstname(String readerFirstname) {
+        this.reader.setFirstname(readerFirstname);
+    }
+    public String getReaderLastname() {
+        return reader.getLastname();
+    }
+
+    public void setReaderLastname(String readerLastname) {
+        this.reader.setLastname(readerLastname);
+    }
     
     
 }

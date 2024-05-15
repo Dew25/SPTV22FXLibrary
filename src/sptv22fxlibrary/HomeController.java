@@ -29,6 +29,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import range.RangepageController;
 import users.listusers.ListusersController;
 import users.loginform.LoginformController;
 import users.newuser.NewuserController;
@@ -45,6 +46,35 @@ public class HomeController implements Initializable {
     @FXML private Label lbInfo;
     @FXML private VBox vbContent;
     
+    @FXML
+    public void showRangepage(){
+        if(sptv22fxlibrary.SPTV22FXLibrary.user == null){
+            getLbInfo().getStyleClass().clear();
+            getLbInfo().getStyleClass().add("infoError");
+            getLbInfo().setText("Войдите в программу со своим логином!"); 
+            return;
+        }
+        if(!sptv22fxlibrary.SPTV22FXLibrary.user.getRoles().contains(sptv22fxlibrary.SPTV22FXLibrary.ROLES.ADMINISTRATOR.toString())){
+            getLbInfo().getStyleClass().clear();
+            getLbInfo().getStyleClass().add("infoError");
+            getLbInfo().setText("У вас нет прав на этот ресурс. Только для администраторов!"); 
+            return;
+        }
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("/range/rangepage.fxml"));
+        try {
+            VBox vbAdminpanelRoot = loader.load();
+            RangepageController rangepageController = loader.getController();
+            rangepageController.setHomeController(this);
+            rangepageController.showRangeBooks();
+            rangepageController.showRangeReaders();
+            vbContent.getChildren().clear();
+            vbContent.getChildren().add(vbAdminpanelRoot);
+            
+        } catch (Exception e) {
+            System.out.println("error: "+e);
+        }
+    }
     @FXML
     public void showAdminPanel(){
         if(sptv22fxlibrary.SPTV22FXLibrary.user == null){
