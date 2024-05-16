@@ -194,7 +194,7 @@ public class NewbookController implements Initializable {
             fileChooser.setTitle("Выберите файл");
             // Фильтры расширений файлов
             fileChooser.getExtensionFilters().addAll(
-                    new FileChooser.ExtensionFilter("Текстовые файлы", "*.txt"),
+                    new FileChooser.ExtensionFilter("Текстовые файлы", "*.jpg"),
                     new FileChooser.ExtensionFilter("Все файлы", "*.*")
             );
             selectedFile = fileChooser.showOpenDialog(getHomeController().getApp().getPrimaryStage());

@@ -6,13 +6,15 @@
 package users.loginform;
 
 import entity.User;
-import java.awt.Button;
+
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
 import sptv22fxlibrary.HomeController;
 import tools.PassEncrypt;
 
@@ -26,6 +28,7 @@ public class LoginformController implements Initializable {
     @FXML private Label lbLoginInfo;
     @FXML private TextField tfLogin;
     @FXML private TextField tfPassword;
+    @FXML private Button btGoToLogin;
     /**
      * Initializes the controller class.
      */
@@ -57,7 +60,20 @@ public class LoginformController implements Initializable {
     }
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        tfLogin.setPromptText("Логин");
+        tfPassword.setPromptText("Пароль");
+        tfPassword.setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.ENTER) {
+                clickLogin();
+            }
+        });
+
+        // Обработчик события для Button
+        btGoToLogin.setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.ENTER) {
+                btGoToLogin.fire();
+            }
+        });
     }    
 
     public void setHomeController(HomeController homeController) {

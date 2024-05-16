@@ -66,8 +66,10 @@ public class HomeController implements Initializable {
             VBox vbAdminpanelRoot = loader.load();
             RangepageController rangepageController = loader.getController();
             rangepageController.setHomeController(this);
+            rangepageController.setListHistories();
             rangepageController.showRangeBooks();
             rangepageController.showRangeReaders();
+            getApp().getPrimaryStage().setHeight(getApp().getPrimaryStage().getHeight()+70);
             vbContent.getChildren().clear();
             vbContent.getChildren().add(vbAdminpanelRoot);
             

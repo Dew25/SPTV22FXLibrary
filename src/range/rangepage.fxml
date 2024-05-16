@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
@@ -14,9 +16,21 @@
             <Font size="18.0" />
          </font>
       </Label>
-      <Label prefHeight="27.0" prefWidth="103.0" text="Рейтинг читателей" />
+      <HBox spacing="4.0">
+         <children>
+            <Label prefHeight="25.0" prefWidth="110.0" text="Рейтинг читателей" />
+            <Label alignment="CENTER_RIGHT" prefHeight="25.0" prefWidth="125.0" text="От" />
+            <DatePicker fx:id="dpFrom" />
+            <Label alignment="CENTER_RIGHT" layoutX="116.0" layoutY="10.0" prefHeight="23.0" prefWidth="42.0" text="До" />
+            <DatePicker fx:id="dpTo" onAction="#changeDatePicker" />
+         </children>
+      </HBox>
       <TableView fx:id="tvRangeReaders" prefHeight="200.0" prefWidth="200.0" />
-      <Label layoutX="20.0" layoutY="80.0" prefHeight="27.0" prefWidth="103.0" text="Рейтинг книг" />
+      <HBox layoutX="20.0" layoutY="57.0" spacing="4.0">
+         <children>
+            <Label fx:id="lbRangeBooks" prefHeight="17.0" prefWidth="582.0" text="Рейтинг книг" />
+         </children>
+      </HBox>
       <ListView fx:id="lvRangeBooks" layoutX="20.0" layoutY="117.0" prefHeight="130.0" prefWidth="580.0" />
    </children>
    <padding>
